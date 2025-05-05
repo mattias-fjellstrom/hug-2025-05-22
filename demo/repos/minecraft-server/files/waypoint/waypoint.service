@@ -1,0 +1,16 @@
+[Unit]
+Description=HCP Waypoint Agent
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=exec
+User=mcserver
+Group=mcserver
+ExecStart=/bin/bash /home/mcserver/start_agent.sh
+WorkingDirectory=/home/mcserver/
+Restart=always
+TimeoutStartSec=600
+
+[Install]
+WantedBy=multi-user.target
