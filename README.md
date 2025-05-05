@@ -2,6 +2,8 @@
 
 In this demo I set up no-code provisioning modules on HCP Terraform and corresponding resources on HCP Waypoint to allow developer self-service workflows.
 
+![Architecture](architecture.png)
+
 ## Prerequisites
 
 You need the following:
