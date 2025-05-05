@@ -40,3 +40,8 @@ There is currently no support to set up HCP Waypoint agents and agent-based acti
 | backup  | Export a backup of the server to S3    |                                    |                                  |
 
 When you are done adding the actions, assign each action to the template for the Minecraft server template.
+
+## How to destroy the demo
+
+1. Go to the [demo](./demo/) directory and run `terraform destroy`.
+1. Go to the [prereq](./prereq/) directory and run `terraform destroy`.
