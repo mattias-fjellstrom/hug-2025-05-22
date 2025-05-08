@@ -1,23 +1,22 @@
 locals {
-  # start coordinates
+  # start and end coordinates, make sure z1>z2 because the calculated depend on this.
   start = {
     x = tonumber(split(",", var.start)[0])
     y = tonumber(split(",", var.start)[1])
-    z = tonumber(split(",", var.start)[2])
+    z = tonumber(split(",", var.start)[2]) > tonumber(split(",", var.end)[2]) ? tonumber(split(",", var.start)[2]) : tonumber(split(",", var.end)[2])
   }
 
-  # end coordinates
   end = {
     x = tonumber(split(",", var.end)[0])
     y = tonumber(split(",", var.end)[1])
-    z = tonumber(split(",", var.end)[2])
+    z = tonumber(split(",", var.start)[2]) > tonumber(split(",", var.end)[2]) ? tonumber(split(",", var.end)[2]) : tonumber(split(",", var.start)[2])
   }
 
   # default block material
   material = "minecraft:red_concrete"
 
   length = abs(local.end.z - local.start.z)
-  middle = floor(local.length / 2)
+  middle = local.start.z - floor(local.length / 2)
 
   # height of the pillars
   height = floor(local.length / 3)
@@ -26,11 +25,11 @@ locals {
   pillar_position = floor(local.length / 8)
 
   # how deep the pillars go below the bridge
-  pillar_depth = 20
+  pillar_depth = 60
 
   # runway is the actual road
   runway = flatten([
-    for z in range(local.start.z - local.height, local.end.z + local.height + 1) : [
+    for z in range(local.start.z + 2 * local.height, local.end.z - 2 * local.height - 1) : [
       # main bridge road
       "${local.start.x - 3};${local.start.y + 2};${z};${local.material}",
       "${local.start.x - 2};${local.start.y + 2};${z};${local.material}",
@@ -61,12 +60,43 @@ locals {
     "${local.start.x - 2};${local.start.y + local.height - 1};${local.start.z + local.pillar_position};${local.material}",
     "${local.start.x - 3};${local.start.y + local.height - 1};${local.start.z + local.pillar_position};${local.material}",
 
+    "${local.start.x + 2};${local.start.y + local.height};${local.start.z + local.pillar_position};${local.material}",
+    "${local.start.x + 1};${local.start.y + local.height};${local.start.z + local.pillar_position};${local.material}",
+    "${local.start.x + 0};${local.start.y + local.height};${local.start.z + local.pillar_position};${local.material}",
+    "${local.start.x - 1};${local.start.y + local.height};${local.start.z + local.pillar_position};${local.material}",
+    "${local.start.x - 2};${local.start.y + local.height};${local.start.z + local.pillar_position};${local.material}",
+    "${local.start.x - 3};${local.start.y + local.height};${local.start.z + local.pillar_position};${local.material}",
+
+    "${local.start.x + 1};${local.start.y + local.height + 1};${local.start.z + local.pillar_position};${local.material}",
+    "${local.start.x + 0};${local.start.y + local.height + 1};${local.start.z + local.pillar_position};${local.material}",
+    "${local.start.x - 1};${local.start.y + local.height + 1};${local.start.z + local.pillar_position};${local.material}",
+    "${local.start.x - 2};${local.start.y + local.height + 1};${local.start.z + local.pillar_position};${local.material}",
+
+    "${local.start.x + 0};${local.start.y + local.height + 2};${local.start.z + local.pillar_position};${local.material}",
+    "${local.start.x - 1};${local.start.y + local.height + 2};${local.start.z + local.pillar_position};${local.material}",
+
+
     "${local.end.x + 2};${local.end.y + local.height - 1};${local.end.z - local.pillar_position};${local.material}",
     "${local.end.x + 1};${local.end.y + local.height - 1};${local.end.z - local.pillar_position};${local.material}",
     "${local.end.x + 0};${local.end.y + local.height - 1};${local.end.z - local.pillar_position};${local.material}",
     "${local.end.x - 1};${local.end.y + local.height - 1};${local.end.z - local.pillar_position};${local.material}",
     "${local.end.x - 2};${local.end.y + local.height - 1};${local.end.z - local.pillar_position};${local.material}",
     "${local.end.x - 3};${local.end.y + local.height - 1};${local.end.z - local.pillar_position};${local.material}",
+
+    "${local.end.x + 2};${local.end.y + local.height};${local.end.z - local.pillar_position};${local.material}",
+    "${local.end.x + 1};${local.end.y + local.height};${local.end.z - local.pillar_position};${local.material}",
+    "${local.end.x + 0};${local.end.y + local.height};${local.end.z - local.pillar_position};${local.material}",
+    "${local.end.x - 1};${local.end.y + local.height};${local.end.z - local.pillar_position};${local.material}",
+    "${local.end.x - 2};${local.end.y + local.height};${local.end.z - local.pillar_position};${local.material}",
+    "${local.end.x - 3};${local.end.y + local.height};${local.end.z - local.pillar_position};${local.material}",
+
+    "${local.end.x + 1};${local.end.y + local.height + 1};${local.end.z - local.pillar_position};${local.material}",
+    "${local.end.x + 0};${local.end.y + local.height + 1};${local.end.z - local.pillar_position};${local.material}",
+    "${local.end.x - 1};${local.end.y + local.height + 1};${local.end.z - local.pillar_position};${local.material}",
+    "${local.end.x - 2};${local.end.y + local.height + 1};${local.end.z - local.pillar_position};${local.material}",
+
+    "${local.end.x + 0};${local.end.y + local.height + 2};${local.end.z - local.pillar_position};${local.material}",
+    "${local.end.x - 1};${local.end.y + local.height + 2};${local.end.z - local.pillar_position};${local.material}",
   ])
 
   # these are the suspension cables
@@ -109,23 +139,24 @@ locals {
 
   # this is the fence that runs along the bridge runway
   fence = flatten([
-    for z in range(local.start.z - local.height, local.end.z + local.height + 1) : [
+    for z in range(local.start.z + 2 * local.height, local.end.z - 2 * local.height - 1) : [
       "${local.start.x - 3};${local.start.y + 3};${z};minecraft:pale_oak_fence",
       "${local.start.x + 2};${local.start.y + 3};${z};minecraft:pale_oak_fence",
     ]
   ])
 
-  # ttorches placed on the bridge fence along the runway
+  # torches placed on the bridge fence along the runway
   runway_lanterns = flatten([
-    for z in range(local.start.z - local.height, local.end.z + local.height + 1) : [
+    for z in range(local.start.z + 2 * local.height, local.end.z - 2 * local.height - 1) : [
       "${local.start.x - 3};${local.start.y + 4};${z};minecraft:redstone_torch",
       "${local.start.x + 2};${local.start.y + 4};${z};minecraft:redstone_torch",
     ]
   ])
 
+  # hashicorp logo as a tunnel on the middle of the bridge
   hashicorp_coordinates = csvdecode(file("${path.module}/data/hashicorp.csv"))
   hashicorp = [
-    for c in local.hashicorp_coordinates : "${local.start.x + tonumber(c.x) - 15},${local.start.y + tonumber(c.y)},${local.start.z + local.middle + tonumber(c.z)}"
+    for c in local.hashicorp_coordinates : "${local.start.x + tonumber(c.x) - 15},${local.start.y + tonumber(c.y)},${local.middle}"
   ]
 }
 
@@ -221,9 +252,4 @@ resource "minecraft_block" "hashicorp" {
     y = tonumber(split(",", each.value)[1])
     z = tonumber(split(",", each.value)[2])
   }
-
-  depends_on = [
-    minecraft_block.runway_lanterns,
-    minecraft_block.suspension_lanterns
-  ]
 }

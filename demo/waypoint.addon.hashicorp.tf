@@ -63,7 +63,7 @@ resource "tfe_no_code_module" "hashicorp" {
 
 resource "hcp_waypoint_add_on_definition" "hashicorp" {
   name                            = "minecraft-hashicorp"
-  summary                         = "Create a Minecraft hashicorp"
+  summary                         = "Create a HashiCorp product logo in Minecraft"
   description                     = "Create a HashiCorp logo at a location (x,y,z) in an existing Minecraft world."
   terraform_project_id            = tfe_project.hug.id
   labels                          = ["minecraft", "aws"]
