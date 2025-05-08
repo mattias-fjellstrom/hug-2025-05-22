@@ -16,7 +16,7 @@ locals {
   # default block material
   material = "minecraft:red_concrete"
 
-  length = local.end.z - local.start.z
+  length = abs(local.end.z - local.start.z)
   middle = floor(local.length / 2)
 
   # height of the pillars
