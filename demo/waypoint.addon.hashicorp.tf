@@ -7,7 +7,7 @@ locals {
 resource "github_repository" "hashicorp" {
   name        = "hug-waypoint-minecraft-hashicorp"
   visibility  = "private"
-  description = "Demo repository for a Minecraft hashicorp (as an HCP Waypoint Add-On)"
+  description = "Demo repository for building HashiCorp logos in Minecraft (as an HCP Waypoint Add-On)"
 }
 
 resource "github_repository_file" "hashicorp" {
@@ -43,6 +43,22 @@ resource "tfe_registry_module" "hashicorp" {
 resource "tfe_no_code_module" "hashicorp" {
   registry_module = tfe_registry_module.hashicorp.id
   version_pin     = "1.0.0"
+
+  variable_options {
+    name = "logo"
+    type = "string"
+    options = [
+      "hashicorp",
+      "terraform",
+      "vault",
+      "boundary",
+      "waypoint",
+      "packer",
+      "consul",
+      "nomad",
+      "vagrant",
+    ]
+  }
 }
 
 resource "hcp_waypoint_add_on_definition" "hashicorp" {
@@ -62,10 +78,20 @@ resource "hcp_waypoint_add_on_definition" "hashicorp" {
       options       = []
     },
     {
-      name          = "size"
+      name          = "logo"
       user_editable = true
       variable_type = "string"
-      options       = []
+      options = [
+        "hashicorp",
+        "terraform",
+        "vault",
+        "boundary",
+        "waypoint",
+        "packer",
+        "consul",
+        "nomad",
+        "vagrant",
+      ]
     }
   ]
 
