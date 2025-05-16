@@ -4,7 +4,7 @@ resource "aws_security_group" "server" {
 
 resource "aws_vpc_security_group_ingress_rule" "rcon" {
   security_group_id = aws_security_group.server.id
-  description       = "Allow RCON traffic"
+  description       = "Allow RCON traffic (e.g. from HCP Terraform)"
   cidr_ipv4         = "0.0.0.0/0"
   from_port         = "25575"
   to_port           = "25575"
@@ -13,7 +13,7 @@ resource "aws_vpc_security_group_ingress_rule" "rcon" {
 
 resource "aws_vpc_security_group_ingress_rule" "minecraft" {
   security_group_id = aws_security_group.server.id
-  description       = "Allow Minecraft server traffic"
+  description       = "Allow Minecraft client traffic to server"
   cidr_ipv4         = "0.0.0.0/0"
   from_port         = "25565"
   to_port           = "25565"
