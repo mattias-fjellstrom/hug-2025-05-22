@@ -304,13 +304,8 @@ locals {
     "${local.origin.x + 4};${local.origin.y - 3};${local.origin.z + 3};minecraft:lava",
     "${local.origin.x + 4};${local.origin.y - 3};${local.origin.z + 4};minecraft:lava",
     "${local.origin.x + 4};${local.origin.y - 3};${local.origin.z + 5};minecraft:lava",
-
-    # door
-    # "${local.origin.x + 2};${local.origin.y + 0};${local.origin.z + 0};minecraft:oak_door[hinge=left]",
-    # "${local.origin.x + 3};${local.origin.y + 0};${local.origin.z + 0};minecraft:oak_door[hinge=right]",
   ]
 }
-
 
 resource "minecraft_block" "house" {
   for_each = toset(local.coordinates)

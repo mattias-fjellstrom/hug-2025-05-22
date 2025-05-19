@@ -111,8 +111,9 @@ locals {
         path    = "/home/mcserver/start_agent.sh"
       },
       {
-        content = file("${path.module}/files/waypoint/backup.sh")
-        path    = "/home/mcserver/backup.sh"
+        content     = file("${path.module}/files/waypoint/backup.sh")
+        path        = "/home/mcserver/backup.sh"
+        permissions = "0755"
       },
       {
         content = file("${path.module}/files/waypoint/agent.hcl")
@@ -269,6 +270,9 @@ resource "aws_instance" "server" {
   instance_type    = "t3.xlarge"
   subnet_id        = aws_subnet.public.id
   user_data_base64 = data.cloudinit_config.server.rendered
+
+  # this key must exist, it is set up in the demo folder
+  key_name = "hug-waypoint"
 
   iam_instance_profile = aws_iam_instance_profile.server.name
 

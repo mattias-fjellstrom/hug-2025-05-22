@@ -1,4 +1,5 @@
 data "hcp_organization" "current" {}
+
 data "hcp_project" "current" {}
 
 resource "hcp_vault_secrets_app" "minecraft" {

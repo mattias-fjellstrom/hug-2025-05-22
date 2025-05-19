@@ -86,6 +86,12 @@ resource "hcp_waypoint_template" "server" {
     }
   ]
 
+  lifecycle {
+    ignore_changes = [
+      actions,
+    ]
+  }
+
   depends_on = [
     tfe_no_code_module.server,
     hcp_waypoint_tfc_config.default,

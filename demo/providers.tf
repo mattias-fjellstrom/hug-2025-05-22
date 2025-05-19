@@ -15,9 +15,19 @@ terraform {
       version = "~> 0.104.0"
     }
 
+    local = {
+      source  = "hashicorp/local"
+      version = "~> 2.5.3"
+    }
+
     tfe = {
       source  = "hashicorp/tfe"
       version = "~> 0.64.0"
+    }
+
+    tls = {
+      source  = "hashicorp/tls"
+      version = "~> 4.1.0"
     }
   }
 }
