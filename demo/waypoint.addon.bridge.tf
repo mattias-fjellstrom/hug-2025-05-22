@@ -51,7 +51,7 @@ resource "hcp_waypoint_add_on_definition" "bridge" {
   description                     = "Create a Minecraft bridge at a location (x,y,z) in an existing Minecraft world."
   terraform_project_id            = tfe_project.hug.id
   labels                          = ["minecraft", "aws"]
-  terraform_no_code_module_source = "private/${var.tfe_organization}/minecraft-bridge/waypoint"
+  terraform_no_code_module_source = "${tfe_registry_module.bridge.registry_name}/${var.tfe_organization}/${tfe_registry_module.bridge.name}/${tfe_registry_module.bridge.module_provider}"
   terraform_no_code_module_id     = tfe_no_code_module.bridge.id
 
   variable_options = [

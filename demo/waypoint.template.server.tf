@@ -72,7 +72,7 @@ resource "hcp_waypoint_template" "server" {
 
   terraform_project_id            = tfe_project.hug.id
   labels                          = ["minecraft", "aws"]
-  terraform_no_code_module_source = "private/${var.tfe_organization}/minecraft-server/waypoint"
+  terraform_no_code_module_source = "${tfe_registry_module.server.registry_name}/${var.tfe_organization}/${tfe_registry_module.server.name}/${tfe_registry_module.server.module_provider}"
   terraform_no_code_module_id     = tfe_no_code_module.server.id
 
   use_module_readme = true
@@ -86,6 +86,8 @@ resource "hcp_waypoint_template" "server" {
     }
   ]
 
+  # currently you can't create agent based actions using Terraform
+  # so these are added manually afterwards, so we must ignore changes to the actions argument
   lifecycle {
     ignore_changes = [
       actions,

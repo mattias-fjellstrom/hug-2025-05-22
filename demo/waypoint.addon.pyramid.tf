@@ -61,7 +61,7 @@ resource "hcp_waypoint_add_on_definition" "pyramid" {
   description                     = "Create a Minecraft pyramid at a location (x,y,z) in an existing Minecraft world."
   terraform_project_id            = tfe_project.hug.id
   labels                          = ["minecraft", "aws"]
-  terraform_no_code_module_source = "private/${var.tfe_organization}/minecraft-pyramid/waypoint"
+  terraform_no_code_module_source = "${tfe_registry_module.pyramid.registry_name}/${var.tfe_organization}/${tfe_registry_module.pyramid.name}/${tfe_registry_module.pyramid.module_provider}"
   terraform_no_code_module_id     = tfe_no_code_module.pyramid.id
 
   variable_options = [
