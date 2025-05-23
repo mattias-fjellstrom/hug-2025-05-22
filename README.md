@@ -12,6 +12,7 @@ You need the following:
 * Access to an **HCP Terraform organization** with **plus tier** license. Authenticate your Terraform CLI to HCP Terraform by running `terraform login`.
 * Access to an AWS account with at least one public Route 53 hosted zone. Install the AWS CLI and configure authentication ([instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)).
 * A GitHub organization (or personal account) that you have already added as a VCS provider to HCP Terraform, and a GitHub PAT with access to this GitHub organization/account provided in the `github_token` variable.
+* The GitHub CLI installed ([instructions](https://cli.github.com/)). Authenticate to GitHub by running `gh auth login`.
 
 ## How to set up the demo
 
