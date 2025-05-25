@@ -67,7 +67,7 @@ resource "tfe_no_code_module" "server" {
 resource "hcp_waypoint_template" "server" {
   name        = "minecraft-server"
   summary     = "A Minecraft server running on AWS EC2"
-  description = "A self-service provisioned Minecraft server on AWS EC2. Uses an AMI from Packer. Runs in a dedicated VPC."
+  description = "A self-service provisioned Minecraft server on AWS EC2. Runs in a dedicated VPC."
 
 
   terraform_project_id            = tfe_project.hug.id
